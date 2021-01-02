@@ -1,0 +1,40 @@
+version: "3.3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    restart: always
+    working_dir: /home/www-user/site
+    volumes:
+      - ./src:/home/www-user/site
+    networks:
+      - www-user
+
+  mysql:
+    image: mysql:5.7.29
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - www-user
+
+  nginx:
+    image: nginx:stable-alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./src:/home/www-user/site
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - www-user
+      
+networks:
+  www-user:
+    driver: bridge
