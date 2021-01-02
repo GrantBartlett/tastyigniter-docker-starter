@@ -1,4 +1,5 @@
 # TastyIgniter Docker Starter
+This is a simple Docker starter for getting a [Tasty Igniter](https://tastyigniter.com/) installation up and running.
 
 ## Getting started
 
@@ -12,13 +13,13 @@
 ### Development
 Run the following in a terminal:
 ```shell
-    docker-compose -f docker-compose-dev.yml build app
-    docker-compose -f docker-compose-dev.yml up -d 
+docker-compose -f docker-compose-dev.yml build app
+docker-compose -f docker-compose-dev.yml up -d 
 ```
 
 ### Production
 Run the following in a terminal:
 ```shell
-    docker-compose build app
-    docker-compose up -d
+docker-compose build app
+docker-compose up -d
 ```
